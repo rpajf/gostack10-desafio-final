@@ -18,22 +18,21 @@ export const Content = styled.div`
 
 export const MyTable = styled.table`
   border-spacing: 20px;
-  border-collapse: collapse;
-  tbody {
-  }
+  border-spacing: 0 1em;
 `;
 
 export const Info = styled.tr`
   background: #f5f5f5;
 
   border: none;
-  padding: 22px 0 14px 0;
   font-size: 16px;
 `;
 
 export const InfoText = styled.th`
   font-size: 16px;
   font-family: 'Roboto';
+  text-align: left;
+  padding-left: 30px;
   font-weight: bold;
 
   color: #434242;
