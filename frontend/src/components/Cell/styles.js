@@ -1,14 +1,12 @@
 import styled from 'styled-components';
 
-export const Container = styled.div`
-  display: flex;
-  align-items: center;
-
+export const Container = styled.tr`
   max-width: 100%;
   background: #fff;
   font-size: 16px;
+  border: none;
 
   border-radius: 4px;
   height: 57px;
-  margin-bottom: 15px;
+  padding-bottom: 15px;
 `;

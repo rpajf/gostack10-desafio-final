@@ -2,6 +2,6 @@ import styled from 'styled-components';
 
 export const Wrapper = styled.div`
   flex: 1;
-  max-height: 100vh;
+  min-height: 100%;
   background: #f5f5f5;
 `;

@@ -15,11 +15,39 @@ export const Content = styled.div`
   flex-direction: column;
   max-width: 1200px;
 `;
+
+export const MyTable = styled.table`
+  border-spacing: 20px;
+  border-collapse: collapse;
+  tbody {
+  }
+`;
+
+export const Info = styled.tr`
+  background: #f5f5f5;
+
+  border: none;
+  padding: 22px 0 14px 0;
+  font-size: 16px;
+`;
+
+export const InfoText = styled.th`
+  font-size: 16px;
+  font-family: 'Roboto';
+  font-weight: bold;
+
+  color: #434242;
+  .actions {
+    margin-left: 40px;
+  }
+`;
+export const DeliveryCell = styled(Cell)``;
+
 export const Title = styled.text`
   margin: 36px 0;
   font-size: 24px;
   font-weight: bold;
-  font-style: 'Roboto';
+  font-family: 'Roboto';
 `;
 
 export const Search = styled.div`
@@ -49,37 +77,7 @@ export const Search = styled.div`
     }
   }
 `;
-export const Info = styled.div`
-  display: flex;
-  align-items: center;
-  background: #f5f5f5;
-  border: none;
-  margin: 22px 0 14px 0;
-  font-size: 16px;
-`;
 
-export const InfoText = styled.text`
-  font-size: 16px;
-  font-style: 'Roboto';
-  font-weight: bold;
-  margin-left: 25px;
-  flex: 1;
-
-  color: #434242;
-  .actions {
-    margin-left: 40px;
-  }
-`;
-export const DeliveryCell = styled(Cell)``;
-
-// export const StatusDiv = styled.div`
-//   display: flex;
-//   justify-content: center;
-//   align-items: center;
-//   width: 99px;
-//   height: 25px;
-//   border-radius: 4px;
-// `;
 export const PageNavigate = styled.div`
   display: flex;
   justify-content: space-between;

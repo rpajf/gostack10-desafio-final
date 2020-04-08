@@ -13,6 +13,7 @@ import {
   Info,
   DeliveryCell,
   Title,
+  MyTable,
   StatusDiv,
   PageNavigate,
 } from './styles';
@@ -79,30 +80,34 @@ export default function Delivery() {
             cadastrar
           </button>
         </Search>
-        <Info>
-          <InfoText>ID</InfoText>
-          <InfoText>Destinatário</InfoText>
-          <InfoText>Entregador</InfoText>
-          <InfoText>Cidade</InfoText>
-          <InfoText>Estado</InfoText>
-          <InfoText>Status</InfoText>
-          <InfoText>Ações</InfoText>
-        </Info>
-        {deliveries.map(delivery => (
-          <DeliveryCell>
-            <CellText key={delivery.id}>#{delivery.id}</CellText>
-            <CellText>{delivery.Recipient.name}</CellText>
-            <CellText>{delivery.Deliveryman.name}</CellText>
+        <MyTable>
+          <Info>
+            <InfoText>ID</InfoText>
+            <InfoText>Destinatário</InfoText>
+            <InfoText>Entregador</InfoText>
+            <InfoText>Cidade</InfoText>
+            <InfoText>Estado</InfoText>
+            <InfoText>Status</InfoText>
+            <InfoText>Ações</InfoText>
+          </Info>
+          <tbody>
+            {deliveries.map(delivery => (
+              <DeliveryCell>
+                <CellText key={delivery.id}>#{delivery.id}</CellText>
+                <CellText>{delivery.Recipient.name}</CellText>
+                <CellText>{delivery.Deliveryman.name}</CellText>
 
-            <CellText>{delivery.Recipient.state}</CellText>
-            <CellText>{delivery.Recipient.city}</CellText>
-            <CellText>{delivery.status}</CellText>
+                <CellText>{delivery.Recipient.state}</CellText>
+                <CellText>{delivery.Recipient.city}</CellText>
+                <CellText>{delivery.status}</CellText>
 
-            <CellText className="actions">
-              <button type="button">...</button>
-            </CellText>
-          </DeliveryCell>
-        ))}
+                <CellText className="actions">
+                  <button type="button">...</button>
+                </CellText>
+              </DeliveryCell>
+            ))}
+          </tbody>
+        </MyTable>
       </Content>
       <PageNavigate>
         <button type="button" onClick={handlePageBack}>
