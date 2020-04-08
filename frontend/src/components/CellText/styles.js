@@ -4,7 +4,8 @@ export const Text = styled.td`
   font-size: 16px;
   border-collapse: collapse;
   border: none;
-  padding: 30px;
+  padding: 25px;
+  border-radius: 4px;
   font-family: 'Roboto';
   color: #6666;
   button {

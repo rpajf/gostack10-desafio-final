@@ -22,8 +22,6 @@ export const MyTable = styled.table`
 `;
 
 export const Info = styled.tr`
-  background: #f5f5f5;
-
   border: none;
   font-size: 16px;
 `;
@@ -45,6 +43,7 @@ export const DeliveryCell = styled(Cell)``;
 export const Title = styled.text`
   margin: 36px 0;
   font-size: 24px;
+
   font-weight: bold;
   font-family: 'Roboto';
 `;
