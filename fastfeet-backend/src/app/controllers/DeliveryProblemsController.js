@@ -2,6 +2,9 @@ import DeliveryProblems from '../models/DeliveryProblems';
 import Delivery from '../models/Delivery';
 import Deliveryman from '../models/Deliveryman';
 
+import CancellationMail from '../jobs/CancellationMail';
+import Queue from '../../lib/Queue';
+
 class DeliveryProblemsController {
   async store(req, res) {
     const { id } = req.params;
@@ -59,8 +62,13 @@ class DeliveryProblemsController {
     if (delivery.end_date !== null && delivery.signature_id !== null) {
       return res.status(400).json({ error: 'This delivery was completed' });
     }
-
     await delivery.update({ canceled_at: new Date(), status: 'Cancelada' });
+    await deliveryProblem.destroy();
+
+    await Queue.add(CancellationMail.key, {
+      delivery,
+      deliveryProblem,
+    });
 
     return res.status(200).json({ delivery });
   }

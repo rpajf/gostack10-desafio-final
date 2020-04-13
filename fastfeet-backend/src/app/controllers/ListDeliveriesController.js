@@ -1,4 +1,5 @@
 import Delivery from '../models/Delivery';
+import Deliveryman from '../models/Deliveryman';
 
 class ListDeliveriesController {
   async index(req, res) {
@@ -16,6 +17,12 @@ class ListDeliveriesController {
         'created_at',
         'start_date',
         'end_date',
+      ],
+      include: [
+        {
+          model: Deliveryman,
+          attributes: ['id', 'name', 'email', 'avatar_id'],
+        },
       ],
       order: ['created_at'],
     });
