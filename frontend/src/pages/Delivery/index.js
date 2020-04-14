@@ -13,14 +13,16 @@ import {
   Info,
   DeliveryCell,
   Title,
+  TableData,
   MyTable,
-  StatusDiv,
   PageNavigate,
+  ActionsDiv,
 } from './styles';
 import api from '~/services/api';
 
 export default function Delivery() {
   const [deliveries, setDeliveries] = useState([]);
+  // const [visible, setVisible] = useState(false);
   const [page, setPage] = useState(1);
   const [count, setCount] = useState('');
 
@@ -64,6 +66,7 @@ export default function Delivery() {
   function handleNavigate() {
     history.push('/form');
   }
+
   return (
     <Container>
       <Content>
@@ -101,9 +104,14 @@ export default function Delivery() {
                 <CellText>{delivery.Recipient.city}</CellText>
                 <CellText>{delivery.status}</CellText>
 
+                {/* <TableData className="actions"> */}
                 <CellText className="actions">
-                  <button type="button">...</button>
+                  <button type="button" onClick={() => {}}>
+                    ...
+                  </button>
+                  {/* <ActionsDiv /> */}
                 </CellText>
+                {/* </TableData> */}
               </DeliveryCell>
             ))}
           </tbody>
