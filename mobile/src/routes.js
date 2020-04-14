@@ -1,11 +1,13 @@
 import * as React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
+import PropTypes from 'prop-types';
 import Sign from '~/pages/Sign';
 import Problems from '~/pages/Problems';
+import Dashboard from '~/pages/Dashboard';
 
 const Stack = createStackNavigator();
 
-export default function Routes() {
+export default function createRouter(signedIn = false) {
   return (
     <Stack.Navigator
       headerMode={false}
@@ -14,7 +16,11 @@ export default function Routes() {
         headerTintColor: '#fff',
       }}
     >
-      <Stack.Screen name="Details" component={Sign} />
+      {!signedIn ? (
+        <Stack.Screen name="SignIn" component={Sign} />
+      ) : (
+        <Stack.Screen name="Dashboard" component={Dashboard} />
+      )}
     </Stack.Navigator>
   );
 }

@@ -1,6 +1,21 @@
-// import * as React from 'react';
-// import { View, Text } from 'react-native';
-// import { NavigationContainer } from '@react-navigation/native';
-// import { createStackNavigator } from '@react-navigation/stack';
+import { useSelector } from 'react-redux';
 
-// const Stack = createStackNavigator();
+import createRouter from './routes';
+
+export default function App() {
+  const signed = useSelector(state => state.auth.signed);
+
+  return createRouter(signed);
+  // Routes is a function that returns a component
+}
+
+/*
+  this component can acess redux informations
+  can help managing the routes that the user is accessing
+  by the state on the redux, this cant be done on index file,
+  because of the Provider
+
+  createRouter is a function that renders a component,
+  the component itself can be returned
+
+*/
