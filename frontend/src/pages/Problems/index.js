@@ -1,15 +1,16 @@
 import React from 'react';
 
 import { FaPlus, FaCaretRight, FaCaretLeft } from 'react-icons/fa';
-import SearchInput from '~/components/Buttons/SearchInput';
-import Cell from '~/components/Cell';
+import CellText from '~/components/CellText';
+
 import {
   Container,
   Content,
   InfoText,
   Info,
   Title,
-  CellText,
+  DeliveryCell,
+  MyTable,
   PageNavigate,
 } from './styles';
 
@@ -32,22 +33,33 @@ export default function Problems() {
     <Container>
       <Title>Problemas na entrega</Title>
 
-      <Info>
-        <InfoText>Encomenda</InfoText>
-        <InfoText>Problema</InfoText>
-        <InfoText>Ações</InfoText>
-      </Info>
-
       <Content>
-        <Cell>
-          <CellText>1</CellText>
-          <CellText>foto</CellText>
-          <CellText>rapa</CellText>
+        <MyTable>
+          <Info>
+            <InfoText>ID</InfoText>
+            <InfoText>Destinatário</InfoText>
+            <InfoText>Entregador</InfoText>
+            <InfoText>Cidade</InfoText>
+            <InfoText>Estado</InfoText>
+            <InfoText>Status</InfoText>
+            <InfoText>Ações</InfoText>
+          </Info>
+          <tbody>
+            <DeliveryCell>
+              <CellText>asd</CellText>
+              <CellText>asd</CellText>
+              <CellText>asd</CellText>
 
-          <CellText>
-            <button type="button">...</button>
-          </CellText>
-        </Cell>
+              <CellText>asd</CellText>
+              <CellText>asd</CellText>
+              <CellText>asd</CellText>
+
+              <CellText className="actions">
+                <button type="button">...</button>
+              </CellText>
+            </DeliveryCell>
+          </tbody>
+        </MyTable>
       </Content>
       <PageNavigate>
         <button type="button" /* onClick={handlePageBack} */>

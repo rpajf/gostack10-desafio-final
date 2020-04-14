@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 
 import { FaPlus, FaCaretRight, FaCaretLeft } from 'react-icons/fa';
 import SearchInput from '~/components/Buttons/SearchInput';
-import Cell from '~/components/Cell';
-
+import CellText from '~/components/CellText';
+import api from '~/services/api';
 import {
   Container,
   Content,
@@ -11,12 +11,29 @@ import {
   InfoText,
   Info,
   Title,
-  Text,
+  MyTable,
+  DeliveryCell,
   PageNavigate,
 } from './styles';
 
-export default function Recipients() {
-  // async function handleSearchRecipient(e) {
+export default function Deliveryman() {
+  // const [deliveryman, setDeliveryman] = useState([]);
+  // const [page, setPage] = useState(1);
+  // const [count, setCount] = useState('');
+
+  // async function loadDeliveryman() {
+  //   const response = await api.get('deliveries', {
+  //     params: {
+  //       page,
+  //       product: '',
+  //     },
+  //   });
+
+  //   setCount(response.data.count);
+  //   setDeliveries(response.data.rows);
+  // }
+
+  // async function handleSearchDelivery(e) {
   //   setPage(1);
   //   const response = await api.get('deliveries', {
   //     params: {
@@ -24,50 +41,75 @@ export default function Recipients() {
   //       page,
   //     },
   //   });
-  //   setRecipients(response.data.rows);
+  //   setDeliveries(response.data.rows);
   // }
   // useEffect(() => {
   //   loadDeliveries();
-  //   eslint-disable-next-line react-hooks/exhaustive-deps
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
   // }, [page]);
+
+  // function handlePage() {
+  //   if (page < count / 5) {
+  //     setPage(page + 1);
+  //   }
+  // }
+  // function handlePageBack() {
+  //   if (page > 1) {
+  //     setPage(page - 1);
+  //   }
+  // }
+  // function handleNavigate() {
+  //   history.push('/form');
+  // }
   return (
     <Container>
-      <Title>Gerenciando Destinatários</Title>
-
-      <Search>
-        <SearchInput
-          // onChange={handleSearchRecipient}
-          type="text"
-          placeholder="Buscar por destinatários"
-        />
-        <button type="button">
-          <FaPlus size={16} color="#fff" />
-          Cadasrar
-        </button>
-      </Search>
-      <Info>
-        <InfoText>ID</InfoText>
-        <InfoText>Nome</InfoText>
-        <InfoText>Endereço</InfoText>
-        <InfoText>Ações</InfoText>
-      </Info>
-
       <Content>
-        <Cell>
-          <Text>1</Text>
-          <Text>foto</Text>
-          <Text>rapa</Text>
+        <Title>Gerenciando destinatários</Title>
 
-          <Text>
-            <button type="button">...</button>
-          </Text>
-        </Cell>
+        <Search>
+          <SearchInput type="text" placeholder="Buscar por encomendas" />
+          <button type="button" onClick={() => {}}>
+            <FaPlus size={16} color="#fff" />
+            cadastrar
+          </button>
+        </Search>
+        <MyTable>
+          <Info>
+            <InfoText>ID</InfoText>
+            <InfoText>Destinatário</InfoText>
+            <InfoText>Entregador</InfoText>
+            <InfoText>Cidade</InfoText>
+            <InfoText>Estado</InfoText>
+            <InfoText>Status</InfoText>
+            <InfoText>Ações</InfoText>
+          </Info>
+          <tbody>
+            <DeliveryCell>
+              <CellText>01</CellText>
+              <CellText>asdasd</CellText>
+              <CellText>asdsad</CellText>
+
+              <CellText>asdasda</CellText>
+              <CellText>asdasd</CellText>
+              <CellText>asdasdasd</CellText>
+
+              {/* <TableData className="actions"> */}
+              <CellText className="actions">
+                <button type="button" onClick={() => {}}>
+                  ...
+                </button>
+                {/* <ActionsDiv /> */}
+              </CellText>
+              {/* </TableData> */}
+            </DeliveryCell>
+          </tbody>
+        </MyTable>
       </Content>
       <PageNavigate>
-        <button type="button" /* onClick={handlePageBack} */>
+        <button type="button" onClick={() => {}}>
           <FaCaretLeft size={30} color="#9999" />
         </button>
-        <button type="button" /* onClick={handlePage} */>
+        <button type="button" onClick={() => {}}>
           <FaCaretRight size={30} color="#9999" />
         </button>
       </PageNavigate>

@@ -3,6 +3,8 @@ import React from 'react';
 import { FaPlus, FaCaretRight, FaCaretLeft } from 'react-icons/fa';
 import SearchInput from '~/components/Buttons/SearchInput';
 import Cell from '~/components/Cell';
+import CellText from '~/components/CellText';
+
 import {
   Container,
   Content,
@@ -10,7 +12,6 @@ import {
   InfoText,
   Info,
   Title,
-  CellText,
   PageNavigate,
 } from './styles';
 
