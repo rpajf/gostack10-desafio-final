@@ -1,5 +1,6 @@
 import styled from 'styled-components/native';
-import { RectButton } from 'react-native-gesture-handler';
+import Text from '~/components/Text';
+import colors from '~/styles/colors';
 
 export const Container = styled.View`
   background-color: #fff;
@@ -25,7 +26,7 @@ export const Avatar = styled.Image`
   height: 53px;
 `;
 
-export const Text = styled.Text`
+export const Small = styled(Text)`
   font-size: 12px;
 `;
 export const BoldText = styled.Text`
@@ -38,14 +39,48 @@ export const ListDelivery = styled.Text``;
 export const OptionsView = styled.View`
   display: flex;
   flex-direction: row;
+  width: 340px;
+  justify-content: space-between;
   align-items: center;
 `;
-export const Pending = styled(RectButton)``;
-export const Delivered = styled(RectButton)``;
+
+export const ButtonsDiv = styled.View`
+  display: flex;
+  flex-direction: row;
+`;
+export const Pending = styled.Button`
+  margin-right: 15px;
+`;
+export const OptionsText = styled.Text`
+  font-size: 12px;
+  color: #999;
+  font-weight: bold;
+`;
+
+export const DeliveryViewText = styled(Text)`
+  font-size: 14px;
+  color: #7d40e7;
+  font-weight: bold;
+`;
+export const Delivered = styled.Button``;
 
 export const Delivery = styled.View`
+  display: flex;
   width: 335px;
+
   height: 169px;
   border: 1px solid #f8f9fd;
   margin: 10.5px 20px 28.5px 20px;
+`;
+
+export const ButtonsView = styled.View`
+  flex-direction: row;
+`;
+
+export const PointOne = styled.View`
+  width: 10px;
+  height: 10px;
+  background: ${colors.primary};
+  border-radius: 5px;
+  border-width: 1px;
 `;

@@ -1,14 +1,17 @@
 import * as React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+
 import PropTypes from 'prop-types';
 import Sign from '~/pages/Sign';
 import Problems from '~/pages/Problems';
 import Dashboard from '~/pages/Dashboard';
 
 const Stack = createStackNavigator();
+const Tab = createBottomTabNavigator();
 
 export default function createRouter(signedIn = false) {
-  return (
+  return !signedIn ? (
     <Stack.Navigator
       headerMode={false}
       screenOptions={{
@@ -16,11 +19,15 @@ export default function createRouter(signedIn = false) {
         headerTintColor: '#fff',
       }}
     >
-      {!signedIn ? (
-        <Stack.Screen name="SignIn" component={Sign} />
-      ) : (
-        <Stack.Screen name="Dashboard" component={Dashboard} />
-      )}
+      <Stack.Screen name="SignIn" component={Sign} />
     </Stack.Navigator>
+  ) : (
+    <Tab.Navigator>
+      <Tab.Screen
+        name="Dashboard"
+        component={Dashboard}
+        screenOptions={{ headerTintColor: '#000000' }}
+      />
+    </Tab.Navigator>
   );
 }
