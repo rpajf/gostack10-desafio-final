@@ -13,14 +13,21 @@ import DeliveryProblemsController from './app/controllers/DeliveryProblemsContro
 import NotificationController from './app/controllers/NotificationController';
 import DeliveryWithdrawlController from './app/controllers/DeliveryWithdrawlController';
 import CompleteDeliveryController from './app/controllers/CompleteDeliveryController';
+import ListCompletedController from './app/controllers/ListCompletedController';
 
 const routes = new Router();
 const upload = multer(multerConfig);
 
 routes.post('/sessions', SessionController.store);
 
+routes.get('/deliveryman/:id', DeliverymanController.show);
+
 // Deliveries assigned to deliveryman
 routes.get('/deliveryman/:id/deliveries', ListDeliveriesController.index);
+routes.get(
+  '/deliveryman/:deliverymanId/completed',
+  ListCompletedController.index
+);
 
 // Deliveryman reports a problem
 routes.post('/delivery/:id/problems', DeliveryProblemsController.store);
@@ -51,6 +58,7 @@ routes.post('/files', upload.single('file'), FileController.store);
 routes.put('/delivery/:problemId/problems', DeliveryProblemsController.update);
 
 routes.get('/deliveryman', DeliverymanController.index);
+routes.put('/deliveryman/:deliverymanId', DeliverymanController.update);
 routes.post('/deliveryman', DeliverymanController.store);
 
 routes.post('/deliveries', DeliveryController.store);

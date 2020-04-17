@@ -1,23 +1,25 @@
+import { Op } from 'sequelize';
 import Delivery from '../models/Delivery';
 import Deliveryman from '../models/Deliveryman';
 
-class ListDeliveriesController {
+class ListCompletedController {
   async index(req, res) {
-    const { id } = req.params;
+    const { deliverymanId } = req.params;
 
-    const delivieries = await Delivery.findAll({
+    const deliveriesDone = await Delivery.findAll({
       where: {
-        deliveryman_id: id,
-        signature_id: null,
+        deliveryman_id: deliverymanId,
+        signature_id: { [Op.not]: null },
       },
       attributes: [
         'id',
-        'product',
         'deliveryman_id',
+        'product',
         'status',
-        'created_at',
+        'signature_id',
         'start_date',
         'end_date',
+        'canceled_at',
       ],
       order: ['id'],
       include: [
@@ -28,8 +30,8 @@ class ListDeliveriesController {
       ],
     });
 
-    return res.json(delivieries);
+    return res.json(deliveriesDone);
   }
 }
 
-export default new ListDeliveriesController();
+export default new ListCompletedController();
