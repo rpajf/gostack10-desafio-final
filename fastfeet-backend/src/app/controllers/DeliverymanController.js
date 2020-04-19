@@ -17,6 +17,13 @@ class DeliverymanController {
       limit: 6,
       offset: (page - 1) * 6,
       attributes: ['id', 'name', 'email', 'avatar_id'],
+      include: [
+        {
+          model: File,
+          as: 'avatar',
+          attributes: ['id', 'path', 'url'],
+        },
+      ],
     });
     return res.json(deliverymans);
   }
@@ -25,10 +32,11 @@ class DeliverymanController {
     const { id } = req.params;
 
     const deliveryman = await Deliveryman.findByPk(id, {
-      attributes: ['id', 'name', 'email', 'created_at'],
+      attributes: ['id', 'name', 'email', 'created_at', 'avatar_id'],
       include: [
         {
           model: File,
+          as: 'avatar',
           attributes: ['id', 'path', 'url'],
         },
       ],
@@ -64,29 +72,38 @@ class DeliverymanController {
 
   async update(req, res) {
     const schema = Yup.object().shape({
-      email: Yup.string(),
-      avatar_id: Yup.number(),
+      name: Yup.string(),
+      email: Yup.string()
+        .email()
+        .required(),
+      avatar_id: Yup.number().notRequired(),
     });
     if (!(await schema.isValid(req.body))) {
       return res.status(400).json({ erro: 'Validation fails' });
     }
-    // eslint-disable-next-line no-unused-vars
     const { deliverymanId } = req.params;
-    const { email, avatar_id } = req.body;
+    const { name, email, avatar_id } = req.body;
 
-    const deliveryman = await Deliveryman.findOne({
-      where: { id: deliverymanId, avatar_id },
+    const avatarExists = await File.findByPk(avatar_id);
+
+    if (!avatarExists) {
+      return res.status(400).json({ error: 'Avatar does not exists' });
+    }
+
+    const deliveryman = await Deliveryman.findByPk(deliverymanId, {
       include: [
         {
           model: File,
-
+          as: 'avatar',
           attributes: ['id', 'path', 'url'],
         },
       ],
     });
-    await deliveryman.update({ email, avatar_id });
 
-    return res.json(deliveryman);
+    await deliveryman.update({ name, email, avatar_id });
+    console.log(deliveryman.avatar.url);
+
+    return res.json({ name, email, avatar_id });
   }
 }
 

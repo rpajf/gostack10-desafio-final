@@ -24,6 +24,8 @@ routes.get('/deliveryman/:id', DeliverymanController.show);
 
 // Deliveries assigned to deliveryman
 routes.get('/deliveryman/:id/deliveries', ListDeliveriesController.index);
+
+// completed
 routes.get(
   '/deliveryman/:deliverymanId/completed',
   ListCompletedController.index
