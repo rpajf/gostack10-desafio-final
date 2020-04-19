@@ -5,16 +5,16 @@ export function signInRequest(id) {
   };
 }
 
-export function signInSuccess(deliveryman) {
+export function signInSuccess(id, user) {
   return {
     type: '@auth/SIGN_IN_SUCCESS',
-    payload: { deliveryman },
+    payload: { id, user },
   };
 }
 
 export function signFailure() {
   return {
-    type: '@auth/SIGN_FAILURE',
+    type: '@auth/SIGN_IN_FAILURE',
   };
 }
 

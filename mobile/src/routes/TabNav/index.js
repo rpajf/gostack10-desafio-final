@@ -1,9 +1,11 @@
 import * as React from 'react';
-import { NavigationContainer } from '@react-navigation/native';
+import { StatusBar } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Icon from 'react-native-vector-icons/MaterialIcons';
-import Dashboard from '~/pages/Dashboard';
 import Profile from '~/pages/Profile';
+import DeliveryRoutes from '../DeliveryRoutes';
+import colors from '~/styles/colors';
+import Details from '~/pages/Details';
 
 const Tab = createBottomTabNavigator();
 
@@ -22,45 +24,31 @@ function ReorderIcon() {
     <Icon style={{ marginTop: 10 }} name="reorder" size={24} color="#999999" />
   );
 }
-export default function tabBar(signedIn = true) {
+
+export default function TabNav() {
   return (
-    <NavigationContainer>
+    <>
+      <StatusBar backgroundColor="#fff" barStyle="dark-content" />
       <Tab.Navigator
-        initialRouteName="Dashboard"
         tabBarOptions={{
-          activeTintColor: '#e91e63',
-          inactiveTintColor: '#999999',
+          activeTintColor: colors.primary,
         }}
       >
-        {/* // tabBarOptions={{
-          activeTintColor: '#7D40E7',
-          inactiveTintColor: '#999999',
-          style: {
-            height: 70,
-            borderTopColor: '#DDDDDD',
-          },
-
-        }} */}
-
         <Tab.Screen
-          name="Profile"
-          component={Profile}
+          name="Entregas"
+          component={DeliveryRoutes}
           options={{
-            tabBarLabel: 'Home',
-            tabBarIcon: ({ color, size }) => AcountIcon,
-            ReorderIcon,
+            tabBarIcon: () => <ReorderIcon />,
           }}
         />
         <Tab.Screen
-          name="Dashboard"
-          component={Dashboard}
+          name="Details"
+          component={Details}
           options={{
-            tabBarLabel: '',
-            tabBarIcon: ({ color, size }) => AcountIcon,
-            ReorderIcon,
+            tabBarIcon: () => <AcountIcon />,
           }}
         />
       </Tab.Navigator>
-    </NavigationContainer>
+    </>
   );
 }

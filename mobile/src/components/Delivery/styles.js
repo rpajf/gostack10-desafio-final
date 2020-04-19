@@ -11,16 +11,33 @@ export const Container = styled.View`
 `;
 
 export const DeliveryFooter = styled.View`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
   width: 335px;
-  margin-top: 64px;
+  margin-top: 67px;
   height: 64px;
+  border-radius: 4px;
 
   background: #f8f9fd;
+`;
+
+export const FooterText = styled(Text)`
+  margin-left: 10px;
+  margin-right: 10px;
 `;
 export const DeliveryHeader = styled.View`
   display: flex;
   flex-direction: row;
   margin-top: 10px;
+`;
+export const DetailsText = styled(Text)`
+  font-size: 12px;
+  color: #999;
+  font-weight: bold;
+  margin-left: 15px;
+  margin-right: 10px;
 `;
 
 export const DeliveryViewText = styled(Text)`

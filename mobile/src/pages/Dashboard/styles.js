@@ -2,6 +2,8 @@ import styled from 'styled-components/native';
 import Text from '~/components/Text';
 import colors from '~/styles/colors';
 
+import NamePhoto from '~/components/NamePhoto';
+
 export const Container = styled.View`
   background-color: #fff;
   display: flex;
@@ -55,6 +57,7 @@ export const OptionsText = styled.Text`
   font-size: 12px;
   color: #999;
   font-weight: bold;
+  margin-left: 15px;
 `;
 
 export const DeliveryViewText = styled(Text)`
@@ -83,4 +86,9 @@ export const PointOne = styled.View`
   background: ${colors.primary};
   border-radius: 5px;
   border-width: 1px;
+`;
+export const DashPhoto = styled(NamePhoto)`
+  width: 53px;
+  height: 53px;
+  
 `;
