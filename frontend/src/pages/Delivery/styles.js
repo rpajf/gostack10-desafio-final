@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 
-import Cell from '~/components/Cell';
 import CellText from '~/components/CellText';
 
 export const Container = styled.div`
@@ -43,7 +42,6 @@ export const InfoText = styled.th`
     padding-right: 20px;
   }
 `;
-export const DeliveryCell = styled(Cell)``;
 
 export const Title = styled.text`
   margin: 36px 0;
@@ -88,60 +86,13 @@ export const PageNavigate = styled.div`
   button {
     border: none;
     background: #f5f5f5;
-    padding-left: 30px;
+    padding-left: 10px;
   }
 `;
-
-export const TableData = styled(CellText)``;
-export const ActionsDiv = styled.div`
-  display: none;
-  position: absolute;
-  width: 150px;
-  height: 120px;
-  border: 1px solid #dadada;
+export const WrapperDelivery = styled.div`
+  width: 175px;
+  height: 227px;
   background: #fff;
-
-  &::before {
-    content: '';
-    position: absolute;
-    left: calc(10% - 10px);
-    top: -20px;
-    width: 0;
-    height: 0;
-    border-left: 10px solid transparent;
-    border-right: 10px solid transparent;
-    border-bottom: 10px solid transparent;
-  }
-  .ativo {
-    margin-left: 60px;
-  }
-  @keyframes slideDown {
-    from {
-      opacity: 0;
-      max-height: 0;
-    }
-    to {
-      opacity: 1;
-      max-height: 200px;
-    }
-  }
 `;
 
-// export const Status = styled.div`
-//   background: ${props => props.background};
-//   border-radius: 12px;
-//   padding: 5px 8px;
-//   span {
-//     width: 10px;
-//     height: 10px;
-//     border-radius: 50%;
-//     background: ${props => props.color};
-//     margin-right: 6px;
-//   }
-//   strong {
-//     text-transform: uppercase;
-//     color: ${props => props.color};
-//     font-size: 14px;
-//     font-weight: bold;
-//   }
-// `;
+export const WrapperInfo = styled.div``;

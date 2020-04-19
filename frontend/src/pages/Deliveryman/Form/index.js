@@ -27,15 +27,14 @@ export default function FormDelivery() {
   }
 
   const handleRedirect = url => history.push(url);
-
   return (
     <Container>
       <FormHeader>
-        <TextHeader>Cadastro de encomendas</TextHeader>
+        <TextHeader>Cadastro de entregadores</TextHeader>
         <div>
           <BackButton
             type="submit"
-            onClick={() => handleRedirect('/deliveries')}
+            onClick={() => handleRedirect('/deliveryman')}
           />
           <SaveButton type="submit" onClick={handleSubmit} />
         </div>

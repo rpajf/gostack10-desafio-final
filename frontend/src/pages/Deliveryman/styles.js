@@ -105,7 +105,7 @@ export const ActionsDiv = styled.div`
     content: '';
     position: absolute;
     left: calc(10% - 10px);
-    top: -20px;
+    top: -10px;
     width: 0;
     height: 0;
     border-left: 10px solid transparent;
@@ -126,22 +126,3 @@ export const ActionsDiv = styled.div`
     }
   }
 `;
-
-// export const Status = styled.div`
-//   background: ${props => props.background};
-//   border-radius: 12px;
-//   padding: 5px 8px;
-//   span {
-//     width: 10px;
-//     height: 10px;
-//     border-radius: 50%;
-//     background: ${props => props.color};
-//     margin-right: 6px;
-//   }
-//   strong {
-//     text-transform: uppercase;
-//     color: ${props => props.color};
-//     font-size: 14px;
-//     font-weight: bold;
-//   }
-// `;

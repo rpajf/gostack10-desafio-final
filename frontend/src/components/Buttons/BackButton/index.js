@@ -4,7 +4,7 @@ import { Back } from './styles';
 
 export default function BackButton({ ...props }) {
   return (
-    <Back {...props} type="button">
+    <Back {...props} type="submit">
       Voltar
     </Back>
   );

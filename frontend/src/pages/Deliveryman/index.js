@@ -3,7 +3,9 @@ import React, { useState, useEffect } from 'react';
 import { FaPlus, FaCaretRight, FaCaretLeft } from 'react-icons/fa';
 import SearchInput from '~/components/Buttons/SearchInput';
 import CellText from '~/components/CellText';
+import history from '~/services/history';
 import api from '~/services/api';
+import DeliverymanCell from './DeliverymanCell';
 import {
   Container,
   Content,
@@ -12,104 +14,83 @@ import {
   Info,
   Title,
   MyTable,
-  DeliveryCell,
   PageNavigate,
 } from './styles';
 
 export default function Deliveryman() {
-  // const [deliveryman, setDeliveryman] = useState([]);
-  // const [page, setPage] = useState(1);
-  // const [count, setCount] = useState('');
+  const [courriers, setDeliveryman] = useState([]);
+  const [page, setPage] = useState(1);
+  const [count, setCount] = useState('');
+  const [filter, setFilter] = useState('');
 
-  // async function loadDeliveryman() {
-  //   const response = await api.get('deliveries', {
-  //     params: {
-  //       page,
-  //       product: '',
-  //     },
-  //   });
+  async function loadDeliveryman() {
+    const response = await api.get(`deliveryman?page=${page}&name=${filter}`);
 
-  //   setCount(response.data.count);
-  //   setDeliveries(response.data.rows);
-  // }
+    setDeliveryman(response.data);
+    setCount(response.data);
+  }
 
-  // async function handleSearchDelivery(e) {
-  //   setPage(1);
-  //   const response = await api.get('deliveries', {
-  //     params: {
-  //       product: e.target.value,
-  //       page,
-  //     },
-  //   });
-  //   setDeliveries(response.data.rows);
-  // }
-  // useEffect(() => {
-  //   loadDeliveries();
-  //   // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, [page]);
+  useEffect(() => {
+    loadDeliveryman();
+  }, [page]);
 
-  // function handlePage() {
-  //   if (page < count / 5) {
-  //     setPage(page + 1);
-  //   }
-  // }
-  // function handlePageBack() {
-  //   if (page > 1) {
-  //     setPage(page - 1);
-  //   }
-  // }
-  // function handleNavigate() {
-  //   history.push('/form');
-  // }
+  const handlePageNext = () => {
+    if (page < count / 5) {
+      setPage(+1);
+    }
+  };
+  const handlePageBack = () => {
+    if (page > 1) {
+      setPage(-1);
+    }
+  };
+
+  const handleRedirect = url => history.push(url);
+
   return (
     <Container>
       <Content>
-        <Title>Gerenciando destinatários</Title>
+        <Title>Gerenciando entregadores</Title>
 
         <Search>
-          <SearchInput type="text" placeholder="Buscar por encomendas" />
-          <button type="button" onClick={() => {}}>
+          <SearchInput
+            type="text"
+            placeholder="Buscar por destinatario"
+            onChange={e => setFilter(e.target.value)}
+          />
+          <button
+            type="submit"
+            onClick={() => handleRedirect('/deliveryman/form')}
+          >
             <FaPlus size={16} color="#fff" />
             cadastrar
           </button>
         </Search>
         <MyTable>
-          <Info>
-            <InfoText>ID</InfoText>
-            <InfoText>Destinatário</InfoText>
-            <InfoText>Entregador</InfoText>
-            <InfoText>Cidade</InfoText>
-            <InfoText>Estado</InfoText>
-            <InfoText>Status</InfoText>
-            <InfoText>Ações</InfoText>
-          </Info>
           <tbody>
-            <DeliveryCell>
-              <CellText>01</CellText>
-              <CellText>asdasd</CellText>
-              <CellText>asdsad</CellText>
-
-              <CellText>asdasda</CellText>
-              <CellText>asdasd</CellText>
-              <CellText>asdasdasd</CellText>
-
-              {/* <TableData className="actions"> */}
-              <CellText className="actions">
-                <button type="button" onClick={() => {}}>
-                  ...
-                </button>
-                {/* <ActionsDiv /> */}
-              </CellText>
-              {/* </TableData> */}
-            </DeliveryCell>
+            <Info>
+              <InfoText>ID</InfoText>
+              <InfoText>Nome</InfoText>
+              <InfoText>Foto</InfoText>
+              <InfoText>Email</InfoText>
+              <InfoText>Ações</InfoText>
+            </Info>
+            {courriers
+              ? courriers.map(deliveryman => (
+                  <DeliverymanCell
+                    key={deliveryman.id}
+                    deliveryman={deliveryman}
+                  />
+                ))
+              : null}
           </tbody>
         </MyTable>
       </Content>
       <PageNavigate>
-        <button type="button" onClick={() => {}}>
+        <button type="button" onClick={handlePageBack}>
           <FaCaretLeft size={30} color="#9999" />
         </button>
-        <button type="button" onClick={() => {}}>
+        <button type="button" onClick={handlePageNext}>
           <FaCaretRight size={30} color="#9999" />
         </button>
       </PageNavigate>
