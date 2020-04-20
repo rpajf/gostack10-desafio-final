@@ -94,4 +94,5 @@ export const DashPhoto = styled(NamePhoto)`
 
 export const Listed = styled.FlatList`
   flex: 1;
+  margin-bottom: 135px;
 `;

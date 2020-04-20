@@ -26,7 +26,7 @@ export default function TabNav() {
           },
           style: {
             backgroundColor: '#fff',
-            height: 65,
+            height: 55,
             paddingTop: 8,
             paddingBottom: 8,
           },

@@ -64,7 +64,7 @@ class CompleteDeliveryController {
       }
 
       await delivery.update({
-        end_dateISO,
+        end_date: end_dateISO,
         status: 'Entregue',
         signature_id,
       });

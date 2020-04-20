@@ -73,7 +73,9 @@ export default function Details({ route, navigation }) {
             </TextView>
             <DateView>
               <TextView>
-                <DetailsBolderText>Date de Retirada</DetailsBolderText>
+                <DetailsBolderText>
+                  Data de Retirada
+                </DetailsBolderText>
                 <DetailsText>
                   {delivery.start_date
                     ? format(parseISO(delivery.start_date), 'dd/MM/yyyy')
