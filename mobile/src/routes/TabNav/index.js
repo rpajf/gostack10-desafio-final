@@ -34,8 +34,8 @@ export default function TabNav() {
         }}
       >
         <Tab.Screen
-          name="problema"
-          component={CompleteDelivery}
+          name="Perfil"
+          component={Profile}
           options={{
             tabBarIcon: ({ color }) => (
               <Icon name="account-circle" size={28} color={color} />

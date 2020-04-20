@@ -31,7 +31,7 @@ export default function Profile() {
         {deliveryman.avatar_id ? (
           <Avatar
             source={{
-              uri: `http://${baseURL}/files/${deliveryman.avatar_id.path}`,
+              uri: `${baseURL}/files/${deliveryman.avatar_id.path}`,
             }}
           />
         ) : (
