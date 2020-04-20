@@ -1,5 +1,9 @@
 import React, { useState, useRef } from 'react';
 import Icon from 'react-native-vector-icons/MaterialIcons';
+import { Platform } from 'react-native';
+
+import { api } from '~/services/api';
+
 import {
   Container,
   Background,
@@ -19,8 +23,28 @@ export default function CompleteDelivery() {
     if (camera) {
       const options = { quality: 0.5, base64: true };
       const data = await camera.current.takePictureAsync(options);
-      setFile(data.uri);
+      setFile(data);
     }
+  }
+
+  async function completeRequest() {
+    const formData = new FormData();
+
+    formData.append('file', {
+      name: file.filename,
+      uri:
+        Platform.OS === 'android' ? file.uri : file.uri.replace('file://', ''),
+    });
+
+    console.tron.log(formData)
+
+    const sendFile = await api.post('/files', formData, {
+      headers: {
+          Accept: 'application/json',
+          'Content-Type': 'multipart/form-data',
+      });
+
+      console.tron.log(sendFile)
   }
 
   return (
@@ -33,7 +57,7 @@ export default function CompleteDelivery() {
             <Icon name="photo-camera" size={25} color="#FFFFFF" />
           </Capture>
         </Content>
-        <SubmitButton>Enviar</SubmitButton>
+        <SubmitButton onPress={completeRequest}>Enviar</SubmitButton>
       </Container>
     </>
   );
