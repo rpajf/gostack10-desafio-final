@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import { DeliveryItem, StatusBall, StatusSpan, Status } from './styles';
 import CellText from '~/components/CellText';
 import Modal from '~/components/Modal';
+import Detail from '~/components/Details';
 
 export default function DeliveryCell({ delivery }) {
   const [visible, setVisible] = useState(false);

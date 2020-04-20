@@ -30,6 +30,10 @@ routes.get(
   '/deliveryman/:deliverymanId/completed',
   ListCompletedController.index
 );
+routes.get(
+  '/delivery/:deliveryId/problems',
+  DeliveryProblemsController.showOne
+);
 
 // Deliveryman reports a problem
 routes.post('/delivery/:id/problems', DeliveryProblemsController.store);
@@ -49,6 +53,7 @@ routes.get('/notifications/:id', NotificationController.index);
 routes.get('/deliveries', DeliveryController.index);
 
 // Admin routes
+routes.post('/files', upload.single('file'), FileController.store);
 routes.use(authMiddleware);
 
 routes.get('/delivery/problems', DeliveryProblemsController.index);
@@ -56,7 +61,6 @@ routes.get('/delivery/problems', DeliveryProblemsController.index);
 routes.get('/recipients', RecipientController.index);
 routes.post('/recipients', RecipientController.store);
 
-routes.post('/files', upload.single('file'), FileController.store);
 routes.put('/delivery/:problemId/problems', DeliveryProblemsController.update);
 
 routes.get('/deliveryman', DeliverymanController.index);

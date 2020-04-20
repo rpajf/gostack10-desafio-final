@@ -1,6 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { StatusBar, TouchableOpacity } from 'react-native';
+import {
+  View,
+  StatusBar,
+  TouchableOpacity,
+  FlatList,
+  Text,
+} from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { signOut } from '~/store/modules/auth/actions';
 import avatar from '~/assets/avatar.png';
@@ -19,13 +25,13 @@ import {
   HeaderContainer,
   OptionsView,
   ButtonsView,
+  Listed,
 } from './styles';
 
 export default function Dashboard({ navigation }) {
   const dispatch = useDispatch();
   const deliveryman = useSelector(state => state.user.profile);
   const auth = useSelector(state => state.auth);
-  const [active, setActive] = useState(false);
 
   // const deliveryman = useSelector(store => store.user.profile);
   const [deliveries, setDeliveries] = useState([]);
@@ -43,19 +49,21 @@ export default function Dashboard({ navigation }) {
     setFilter('RETIRADA');
   }
   async function loadCompletedDeliveries() {
-    await api.get(`deliveryman/${auth.id}/deliveries`);
+    const response = await api.get(`deliveryman/${auth.id}/completed`);
+    console.tron.log(response);
+    setDeliveries(response.data);
   }
   async function loadPendingDeliveries() {
-    await api.get(`deliveryman/${auth.id}/completed`);
+    const response = await api.get(`deliveryman/${auth.id}/deliveries`);
+    console.tron.log(response);
+    setDeliveries(response.data);
   }
   function fetchDeliveries() {
-    // eslint-disable-next-line default-case
     switch (filter) {
       case 'PENDENTE':
         loadPendingDeliveries();
         break;
     }
-    // eslint-disable-next-line default-case
     switch (filter) {
       case 'RETIRADA':
         loadCompletedDeliveries();
@@ -96,29 +104,23 @@ export default function Dashboard({ navigation }) {
       <OptionsView>
         <BoldText>Entregas</BoldText>
         <ButtonsView>
-          <TouchableOpacity
-            onPress={() => {
-              setActive(true);
-            }}
-          >
+          <TouchableOpacity onPress={handlePending}>
             <OptionsText
               style={{
-                color: active ? '#7D40E7' : '#999',
-                textDecorationLine: active ? 'underline' : 'none',
+                color: filter === 'PENDENTE' ? '#7D40E7' : '#999',
+                textDecorationLine:
+                  filter === 'PENDENTE' ? 'underline' : 'none',
               }}
             >
               Pendentes
             </OptionsText>
           </TouchableOpacity>
-          <TouchableOpacity
-            onPress={() => {
-              setActive(false);
-            }}
-          >
+          <TouchableOpacity onPress={handleCompleted}>
             <OptionsText
               style={{
-                color: active ? '#999' : '#7e40e7',
-                textDecorationLine: active ? 'none' : 'underline',
+                color: filter === 'RETIRADA' ? '#7e40e7' : '#999',
+                textDecorationLine:
+                  filter === 'RETIRADA' ? 'underline' : 'none',
               }}
             >
               Entregues
@@ -126,8 +128,14 @@ export default function Dashboard({ navigation }) {
           </TouchableOpacity>
         </ButtonsView>
       </OptionsView>
-
-      <Delivery />
+      <View>
+        <Listed
+          showsVerticalScrollIndicator={false}
+          data={deliveries}
+          keyExtractor={delivery => String(delivery.id)}
+          renderItem={({ item }) => <Delivery delivery={item} />}
+        />
+      </View>
     </Container>
   );
 }

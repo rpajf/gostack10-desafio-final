@@ -8,20 +8,26 @@ import { api } from '~/services/api';
 import StepProgress from './StepProgress';
 import Details from '~/pages/Details';
 
+import { format, parseISO } from 'date-fns';
+
 import {
   Container,
   DeliveryHeader,
   DeliveryFooter,
   DeliveryViewText,
+  FooterTextTitle,
   FooterText,
   DetailsText,
 } from './styles';
 
-export default function Delivery() {
+export default function Delivery({ delivery }) {
   const navigation = useNavigation();
   const auth = useSelector(state => state.auth);
 
   // async function handleWithdrawl() {}
+  const goToDelivery = () => {
+    return navigation.navigate('Details');
+  };
 
   return (
     <Container>
@@ -35,30 +41,35 @@ export default function Delivery() {
             marginRight: 10,
           }}
         />
-        <DeliveryViewText>Encomenda 01</DeliveryViewText>
+        <DeliveryViewText>{delivery.id}</DeliveryViewText>
       </DeliveryHeader>
-      <StepProgress />
+      <StepProgress status={delivery.status} />
       <DeliveryFooter>
         <View
           style={{
             display: 'flex',
           }}
         >
-          <FooterText>Data</FooterText>
-          <FooterText>14/07/2020</FooterText>
+          <FooterTextTitle>Data</FooterTextTitle>
+          <FooterText>
+            {delivery.created_at &&
+              format(parseISO(delivery.created_at), 'dd/MM/yyyy')}
+          </FooterText>
         </View>
         <View
           style={{
             display: 'flex',
           }}
         >
-          <FooterText>Cidade</FooterText>
-          <FooterText>Sao luis</FooterText>
+          <FooterTextTitle>Cidade</FooterTextTitle>
+          <FooterText>
+            {delivery.Recipient && delivery.Recipient.city}
+          </FooterText>
         </View>
-        <TouchableOpacity>
-          <DetailsText onPress={() => navigation.navigate('Details')}>
-            Ver Detalhes
-          </DetailsText>
+        <TouchableOpacity
+          onPress={() => navigation.navigate('Details', { delivery })}
+        >
+          <DetailsText>Ver Detalhes</DetailsText>
         </TouchableOpacity>
       </DeliveryFooter>
     </Container>

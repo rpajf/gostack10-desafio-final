@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from 'react';
 
 import { FaPlus, FaCaretRight, FaCaretLeft } from 'react-icons/fa';
+import { toast } from 'react-toastify';
 import CellText from '~/components/CellText';
+import Details from '~/components/Details';
 import ProblemCell from './ProblemCell';
+
 import api from '~/services/api';
 
 import {
@@ -18,6 +21,7 @@ import {
 export default function Problems() {
   const [problems, setProblem] = useState([]);
   const [page, setPage] = useState(1);
+  const [showDetail, setShowDetail] = useState(false);
   const [count, setCount] = useState('');
 
   async function loadProblems() {
@@ -41,6 +45,36 @@ export default function Problems() {
       setPage(-1);
     }
   };
+  const options = [
+    {
+      title: 'Visualizar',
+      image: Visibility,
+      handleClick: async id => {
+        setShowDetail(!showDetail);
+        setId(id);
+        const response = await api.get(`problems/${id}`);
+        setProblem(response.data.rows);
+      },
+    },
+    {
+      title: 'Cancelar a encomenda',
+      image: Delete,
+      handleClick: async id => {
+        const agree = window.confirm(
+          'Tem certeza que deseja cancelar essa encomenda?'
+        );
+        if (agree) {
+          try {
+            const response = await api.put(`package/cancel/${id}`);
+            toast.success(response.data.message);
+            fetch();
+          } catch (err) {
+            console.log(err);
+          }
+        }
+      },
+    },
+  ];
 
   return (
     <Container>

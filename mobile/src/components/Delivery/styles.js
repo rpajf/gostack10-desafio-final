@@ -1,11 +1,10 @@
 import styled from 'styled-components/native';
 import Text from '~/components/Text';
+import Button from '~/components/Button';
 
 export const Container = styled.View`
   display: flex;
-  width: 335px;
-
-  height: 169px;
+  flex: 1;
   border: 1px solid #f8f9fd;
   margin: 10.5px 20px 28.5px 20px;
 `;
@@ -23,10 +22,22 @@ export const DeliveryFooter = styled.View`
   background: #f8f9fd;
 `;
 
+export const FooterTextTitle = styled(Text)`
+  margin-left: 10px;
+  margin-right: 10px;
+  font-size: 10px;
+  color: #999999;
+  font-weight: bold;
+`;
+
 export const FooterText = styled(Text)`
   margin-left: 10px;
   margin-right: 10px;
+  font-size: 13px;
+  color: #444444;
+  font-weight: bold;
 `;
+
 export const DeliveryHeader = styled.View`
   display: flex;
   flex-direction: row;
@@ -34,7 +45,7 @@ export const DeliveryHeader = styled.View`
 `;
 export const DetailsText = styled(Text)`
   font-size: 12px;
-  color: #999;
+  color: #7d40e7;
   font-weight: bold;
   margin-left: 15px;
   margin-right: 10px;

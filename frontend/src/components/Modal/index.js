@@ -3,6 +3,8 @@ import React from 'react';
 import { MdDeleteForever } from 'react-icons/md';
 import { IoMdEye } from 'react-icons/io';
 import { FaPen } from 'react-icons/fa';
+import Detail from '~/components/Details';
+
 
 import { Container, ButtonsLine } from './styles';
 

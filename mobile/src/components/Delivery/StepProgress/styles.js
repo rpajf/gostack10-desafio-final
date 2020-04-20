@@ -1,6 +1,7 @@
 import styled from 'styled-components/native';
 
 import Text from '~/components/Text';
+import colors from '~/styles/colors';
 
 export const Container = styled.View`
   align-self: center;
@@ -28,8 +29,8 @@ export const StepBall = styled.View`
   height: 10px;
 
   border-radius: 50px;
-
-  background: #7d40e7;
+  background: ${props => (props.filled ? colors.primary : '#fff')};
+  border: 1px solid #7d40e7;
 `;
 
 export const StatusContainer = styled.View`

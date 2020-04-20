@@ -1,6 +1,7 @@
 import { Op } from 'sequelize';
 import Delivery from '../models/Delivery';
 import Deliveryman from '../models/Deliveryman';
+import Recipient from '../models/Recipient';
 
 class ListCompletedController {
   async index(req, res) {
@@ -26,6 +27,18 @@ class ListCompletedController {
         {
           model: Deliveryman,
           attributes: ['id', 'name', 'avatar_id', 'email'],
+        },
+        {
+          model: Recipient,
+          attributes: [
+            'id',
+            'name',
+            'city',
+            'state',
+            'street_adress',
+            'street_number',
+            'postal_code',
+          ],
         },
       ],
     });

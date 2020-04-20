@@ -1,7 +1,9 @@
 import React from 'react';
 import { View } from 'react-native';
 import { createStackNavigator } from '@react-navigation/stack';
-import Problems from '~/pages/Problems';
+import SeeProblems from '~/pages/SeeProblems';
+import ReportProblem from '~/pages/ReportProblem';
+import CompleteDelivery from '~/pages/CompleteDelivery';
 
 import Details from '~/pages/Details';
 import Dashboard from '~/pages/Dashboard';
@@ -30,10 +32,24 @@ export default function DeliveryRoutes() {
         component={Dashboard}
       />
       <Stack.Screen
-        name="Problemas"
-        component={Problems}
+        name="ReportProblem"
+        component={ReportProblem}
         options={{
           title: 'Informar problemas',
+        }}
+      />
+      <Stack.Screen
+        name="CompleteDelivery"
+        component={CompleteDelivery}
+        options={{
+          title: 'Completar entrega',
+        }}
+      />
+      <Stack.Screen
+        name="SeeProblems"
+        component={SeeProblems}
+        options={{
+          title: 'Ver problemas',
         }}
       />
       <Stack.Screen

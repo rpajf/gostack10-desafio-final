@@ -20,6 +20,7 @@ import {
 
 export default function Delivery() {
   const [deliveries, setDeliveries] = useState([]);
+  const [showDetail, setShowDetail] = useState(false);
   const [page, setPage] = useState(1);
   const [count, setCount] = useState('');
 

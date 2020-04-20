@@ -42,6 +42,28 @@ class DeliveryProblemsController {
     return res.json(problemsPackages);
   }
 
+  async showOne(req, res) {
+    const { deliveryId } = req.params;
+
+    const delivery = await DeliveryProblems.findOne({
+      where: {
+        delivery_id: deliveryId,
+      },
+    });
+    return res.json(delivery);
+  }
+
+  async showProblem(req, res) {
+    const { problemId } = req.params;
+
+    const problem = await DeliveryProblems.findOne({
+      where: {
+        id: problemId,
+      },
+    });
+    return res.json(problem);
+  }
+
   async update(req, res) {
     const { problemId } = req.params;
 

@@ -10,25 +10,34 @@ import {
   DescriptionText,
 } from './styles';
 
-export default function StepProgress({ ...props }) {
+export default function StepProgress({ status }) {
   return (
-    <Container {...props}>
+    <Container>
       <StepBar />
       <StepBallContainer>
         <StatusContainer>
-          <StepBall />
+          <StepBall
+            filled={
+              status === 'Pendente' ||
+              status === 'Retirada' ||
+              status === 'Entregue'
+            }
+          />
           <DescriptionText>Aguardando{'\n'} retirada</DescriptionText>
         </StatusContainer>
 
         <StatusContainer>
-          <StepBall />
+          <StepBall filled={status === 'Entregue' || status === 'Retirada'} />
           <DescriptionText>Retirada</DescriptionText>
         </StatusContainer>
         <StatusContainer>
-          <StepBall />
+          <StepBall filled={status === 'Entregue'} />
           <DescriptionText>Entregue</DescriptionText>
         </StatusContainer>
       </StepBallContainer>
     </Container>
   );
 }
+StepProgress.propTypes = {
+  status: PropTypes.string.isRequired,
+};

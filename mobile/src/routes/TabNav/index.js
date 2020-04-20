@@ -1,29 +1,17 @@
+/* eslint-disable react/prop-types */
 import * as React from 'react';
 import { StatusBar } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import Profile from '~/pages/Profile';
+import ReportProblem from '~/pages/ReportProblem';
+import SeeProblems from '~/pages/SeeProblems';
+import CompleteDelivery from '~/pages/CompleteDelivery';
 import DeliveryRoutes from '../DeliveryRoutes';
 import colors from '~/styles/colors';
 import Details from '~/pages/Details';
 
 const Tab = createBottomTabNavigator();
-
-function AcountIcon() {
-  return (
-    <Icon
-      style={{ marginTop: 10 }}
-      name="account-circle"
-      size={24}
-      color="#999999"
-    />
-  );
-}
-function ReorderIcon() {
-  return (
-    <Icon style={{ marginTop: 10 }} name="reorder" size={24} color="#999999" />
-  );
-}
 
 export default function TabNav() {
   return (
@@ -32,20 +20,35 @@ export default function TabNav() {
       <Tab.Navigator
         tabBarOptions={{
           activeTintColor: colors.primary,
+          inactiveTintColor: '#ccc',
+          labelStyle: {
+            fontSize: 14,
+          },
+          style: {
+            backgroundColor: '#fff',
+            height: 65,
+            paddingTop: 8,
+            paddingBottom: 8,
+          },
+          keyboardHidesTabBar: true,
         }}
       >
+        <Tab.Screen
+          name="problema"
+          component={CompleteDelivery}
+          options={{
+            tabBarIcon: ({ color }) => (
+              <Icon name="account-circle" size={28} color={color} />
+            ),
+          }}
+        />
         <Tab.Screen
           name="Entregas"
           component={DeliveryRoutes}
           options={{
-            tabBarIcon: () => <ReorderIcon />,
-          }}
-        />
-        <Tab.Screen
-          name="Details"
-          component={Details}
-          options={{
-            tabBarIcon: () => <AcountIcon />,
+            tabBarIcon: ({ color }) => (
+              <Icon name="reorder" size={28} color={color} />
+            ),
           }}
         />
       </Tab.Navigator>

@@ -90,5 +90,8 @@ export const PointOne = styled.View`
 export const DashPhoto = styled(NamePhoto)`
   width: 53px;
   height: 53px;
-  
+`;
+
+export const Listed = styled.FlatList`
+  flex: 1;
 `;
