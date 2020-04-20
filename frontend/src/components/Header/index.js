@@ -17,17 +17,17 @@ export default function Header() {
       <Content>
         <nav className="active">
           <img src={headerLogo} alt="header-logo" />
-          <Link className="first-item nav" to="/delivery">
+          <Link className="first-item nav" to="/deliveries">
             Encomendas
           </Link>
-          <Link className="nav" to="/entregadores">
+          <Link className="nav" to="/deliveryman">
             Entregadores
           </Link>
-          <Link className="nav" to="/problemas">
-            Problemas
-          </Link>
-          <Link className="nav" to="/destinatarios">
+          <Link className="nav" to="/recipients">
             Destinatario
+          </Link>
+          <Link className="nav" to="/problems">
+            Problemas
           </Link>
         </nav>
         <div>

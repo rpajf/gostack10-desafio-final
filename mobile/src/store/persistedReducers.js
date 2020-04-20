@@ -1,0 +1,20 @@
+import AsyncStorage from '@react-native-community/async-storage';
+
+import { persistReducer } from 'redux-persist';
+
+export default reducers => {
+  const persistedReducer = persistReducer(
+    {
+      key: 'fastfeet',
+      storage: AsyncStorage,
+      whitelist: ['auth', 'user'],
+    },
+    reducers
+  );
+
+  return persistedReducer;
+};
+/*
+  storage for all enviroments
+  whitelist -> only reducers that will have their info persisted
+*/

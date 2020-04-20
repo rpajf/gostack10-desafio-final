@@ -1,5 +1,8 @@
 import styled from 'styled-components';
 
+import Cell from '~/components/Cell';
+import CellText from '~/components/CellText';
+
 export const Container = styled.div`
   margin-left: 60px;
   display: flex;
@@ -33,39 +36,30 @@ export const Search = styled.div`
     border: none;
   }
 `;
-
-export const Info = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  height: 50px;
-  margin: 10px;
+export const MyTable = styled.table`
+  border-spacing: 20px;
+  border-spacing: 0 1em;
 `;
 
-export const InfoText = styled.text`
+export const InfoText = styled.th`
   font-size: 16px;
-  font-style: 'Roboto';
+  font-family: 'Roboto';
+  text-align: left;
+  padding-left: 30px;
   font-weight: bold;
-  margin: 10px 25px;
+
   color: #434242;
-`;
-
-export const CellText = styled.text`
-  margin: 10px 25px;
-  font-size: 16px;
-
-  font-style: 'Roboto';
-  color: #6666;
-  align-self: center;
-  button {
-    border: none;
-    font-size: 16px;
-    font-style: 'Roboto';
-    align-self: center;
-    font-weight: bold;
-    color: #6666;
+  .actions {
+    margin-left: 40px;
   }
 `;
+export const Info = styled.tr`
+  border: none;
+  font-size: 16px;
+`;
+export const DeliveryCell = styled(Cell)``;
+
+export const Text = styled(CellText)``;
 
 export const StatusDiv = styled.div`
   display: flex;

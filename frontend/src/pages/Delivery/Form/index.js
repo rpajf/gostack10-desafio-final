@@ -1,5 +1,8 @@
 import React from 'react';
-import { Form, Input } from '@rocketseat/unform';
+import { FaAngleDown, FaCheck, FaAngleLeft } from 'react-icons/fa';
+import { Form } from '@unform/web';
+import { Scope } from '@unform/core';
+import InputUnfrm from '~/components/InputUnfrm';
 import BackButton from '~/components/Buttons/BackButton';
 import SaveButton from '~/components/Buttons/SaveButton';
 import history from '~/services/history';
@@ -9,42 +12,49 @@ import {
   FormContent,
   FormHeader,
   FormField,
-  Text,
+  MyText,
+  FormInput,
   TextHeader,
 } from './styles';
 
 export default function FormDelivery() {
-  function handleNavigate() {
-    history.replace('/delivery');
+  function handleSubmit(data) {
+    if (data.name === '') {
+      alert('Nome invalido');
+    }
+    // eslint-disable-next-line no-console
+    console.log(data);
   }
+
+  const handleRedirect = url => history.push(url);
+
   return (
     <Container>
       <FormHeader>
-        <TextHeader>Edição de encomendas</TextHeader>
+        <TextHeader>Cadastro de encomendas</TextHeader>
         <div>
-          <BackButton onClick={handleNavigate} /> <SaveButton />
+          <BackButton
+            type="submit"
+            onClick={() => handleRedirect('/deliveries')}
+          />
+          <SaveButton type="submit" onClick={handleSubmit} />
         </div>
       </FormHeader>
       <FormContent>
-        <div>
+        <Form id="form1" onSubmit={handleSubmit}>
           <FormField>
-            <Text>Destinatário</Text>
-            <Input type="text" name="name" placeholder="John Doe" />
+            <MyText>Destinatário</MyText>
+            <InputUnfrm
+              type="text"
+              name="delivery.Recipient.name"
+              placeholder="Ludwig van Beethoven"
+            />
           </FormField>
           <FormField>
-            <Text>Entregador</Text>
-            <Input type="text" name="name" placeholder="Gail Wynand" />
+            <MyText>Entregador</MyText>
+            <FormInput type="text" name="asd" placeholder="John Doe" />
           </FormField>
-        </div>
-        <FormField className="last-field">
-          <Text>Nome do produto</Text>
-          <Input
-            type="text"
-            name="name"
-            placeholder="Macbook Pro 2015"
-            className="bottom-input"
-          />
-        </FormField>
+        </Form>
       </FormContent>
     </Container>
   );

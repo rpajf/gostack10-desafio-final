@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-import Cell from '~/components/Cell';
+import CellText from '~/components/CellText';
 
 export const Container = styled.div`
   margin: 0 60px;
@@ -22,8 +22,6 @@ export const MyTable = styled.table`
 `;
 
 export const Info = styled.tr`
-  background: #f5f5f5;
-
   border: none;
   font-size: 16px;
 `;
@@ -31,20 +29,24 @@ export const Info = styled.tr`
 export const InfoText = styled.th`
   font-size: 16px;
   font-family: 'Roboto';
+  padding-right: 10px;
   text-align: left;
-  padding-left: 30px;
   font-weight: bold;
 
   color: #434242;
-  .actions {
-    margin-left: 40px;
+  :not(:last-child) {
+    padding-left: 27px;
+  }
+  :last-child {
+    text-align: right;
+    padding-right: 20px;
   }
 `;
-export const DeliveryCell = styled(Cell)``;
 
 export const Title = styled.text`
   margin: 36px 0;
   font-size: 24px;
+
   font-weight: bold;
   font-family: 'Roboto';
 `;
@@ -84,5 +86,13 @@ export const PageNavigate = styled.div`
   button {
     border: none;
     background: #f5f5f5;
+    padding-left: 10px;
   }
 `;
+export const WrapperDelivery = styled.div`
+  width: 175px;
+  height: 227px;
+  background: #fff;
+`;
+
+export const WrapperInfo = styled.div``;

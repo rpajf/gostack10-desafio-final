@@ -7,5 +7,6 @@ export const Save = styled.button`
   color: #fff;
   border-radius: 4px;
   font-weight: bold;
+
   text-transform: uppercase;
 `;

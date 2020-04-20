@@ -14,12 +14,12 @@ export default function auth(state = INITIAL_STATE, action) {
         break;
       }
       case '@auth/SIGN_IN_SUCCESS': {
-        draft.token = action.payload.id;
+        draft.id = action.payload.id;
         draft.signed = true;
         draft.loading = false;
         break;
       }
-      case '@auth/SIGN_FAILURE': {
+      case '@auth/SIGN_IN_FAILURE': {
         draft.loading = false;
         break;
       }

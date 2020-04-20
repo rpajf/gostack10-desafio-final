@@ -3,7 +3,9 @@ import React, { useState, useEffect } from 'react';
 import { FaPlus, FaCaretRight, FaCaretLeft } from 'react-icons/fa';
 import history from '~/services/history';
 import SearchInput from '~/components/Buttons/SearchInput';
-import CellText from '~/components/CellText';
+import DeliveryCell from './DeliveryCell';
+import api from '~/services/api';
+import Wrapper from '~/components/Wrapper';
 
 import {
   Container,
@@ -11,16 +13,14 @@ import {
   Search,
   InfoText,
   Info,
-  DeliveryCell,
   Title,
   MyTable,
-  StatusDiv,
   PageNavigate,
 } from './styles';
-import api from '~/services/api';
 
 export default function Delivery() {
   const [deliveries, setDeliveries] = useState([]);
+  const [showDetail, setShowDetail] = useState(false);
   const [page, setPage] = useState(1);
   const [count, setCount] = useState('');
 
@@ -61,9 +61,20 @@ export default function Delivery() {
       setPage(page - 1);
     }
   }
-  function handleNavigate() {
-    history.push('/form');
-  }
+  // const options = [
+  //   {
+  //     title: 'Visualizar',
+  //     handleClick: async id => {
+  //       setShowModal(!showModal);
+  //       setId(id);
+  //       const response = await api.get(`package/${id}`);
+  //       setList(response.data);
+  //     },
+  //   },
+  // ];
+
+  const handleRedirect = url => history.push(url);
+
   return (
     <Container>
       <Content>
@@ -75,37 +86,40 @@ export default function Delivery() {
             type="text"
             placeholder="Buscar por encomendas"
           />
-          <button type="button" onClick={handleNavigate}>
+          <button
+            type="button"
+            onClick={() => handleRedirect('/delivery/form')}
+          >
             <FaPlus size={16} color="#fff" />
             cadastrar
           </button>
         </Search>
         <MyTable>
-          <Info>
-            <InfoText>ID</InfoText>
-            <InfoText>Destinatário</InfoText>
-            <InfoText>Entregador</InfoText>
-            <InfoText>Cidade</InfoText>
-            <InfoText>Estado</InfoText>
-            <InfoText>Status</InfoText>
-            <InfoText>Ações</InfoText>
-          </Info>
           <tbody>
+            <Info>
+              <InfoText>ID</InfoText>
+              <InfoText>Destinatário</InfoText>
+              <InfoText>Entregador</InfoText>
+              <InfoText>Cidade</InfoText>
+              <InfoText>Estado</InfoText>
+              <InfoText>Status</InfoText>
+              <InfoText>Ações</InfoText>
+            </Info>
+
             {deliveries.map(delivery => (
-              <DeliveryCell>
-                <CellText key={delivery.id}>#{delivery.id}</CellText>
-                <CellText>{delivery.Recipient.name}</CellText>
-                <CellText>{delivery.Deliveryman.name}</CellText>
-
-                <CellText>{delivery.Recipient.state}</CellText>
-                <CellText>{delivery.Recipient.city}</CellText>
-                <CellText>{delivery.status}</CellText>
-
-                <CellText className="actions">
-                  <button type="button">...</button>
-                </CellText>
-              </DeliveryCell>
+              <DeliveryCell key={delivery.id} delivery={delivery} />
             ))}
+            {/* <Wrapper
+              active={{
+                showModal,
+                handleShowModal: () => {
+                  setShowModal();
+                },
+              }}
+              height={325}
+              id={id}
+              url="deliveries/"
+            /> */}
           </tbody>
         </MyTable>
       </Content>

@@ -1,4 +1,6 @@
 import Delivery from '../models/Delivery';
+import Deliveryman from '../models/Deliveryman';
+import Recipient from '../models/Recipient';
 
 class ListDeliveriesController {
   async index(req, res) {
@@ -7,6 +9,7 @@ class ListDeliveriesController {
     const delivieries = await Delivery.findAll({
       where: {
         deliveryman_id: id,
+        signature_id: null,
       },
       attributes: [
         'id',
@@ -17,7 +20,25 @@ class ListDeliveriesController {
         'start_date',
         'end_date',
       ],
-      order: ['created_at'],
+      order: ['id'],
+      include: [
+        {
+          model: Deliveryman,
+          attributes: ['id', 'name', 'avatar_id', 'email'],
+        },
+        {
+          model: Recipient,
+          attributes: [
+            'id',
+            'name',
+            'city',
+            'state',
+            'street_adress',
+            'street_number',
+            'postal_code',
+          ],
+        },
+      ],
     });
 
     return res.json(delivieries);
