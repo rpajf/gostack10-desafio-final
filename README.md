@@ -4,7 +4,7 @@
 ### App para uma transportadora fictícia - completo (back-end, front-end e mobile).
 
 #### Instalação
-
+APENAS ANDROID
 
 Baixe o arquivo zip ou clone o repositório com:
 ```
