@@ -1,4 +1,5 @@
 import React, { useState, useRef } from 'react';
+import { useSelector } from 'react-redux';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { Platform } from 'react-native';
 
@@ -11,12 +12,14 @@ import {
   SubmitButton,
   Camera,
   Content,
-  Wrapper,
 } from './styles';
 
-export default function CompleteDelivery() {
+export default function CompleteDelivery({ route, navigation }) {
+  const { deliveryId } = route.params;
+
   const camera = useRef(null);
-  // const [camera, setCamera] = useState();
+  const auth = useSelector(state => state.auth);
+
   const [file, setFile] = useState();
 
   async function takePicture() {
@@ -29,22 +32,33 @@ export default function CompleteDelivery() {
 
   async function completeRequest() {
     const formData = new FormData();
+    const end_date = new Date();
 
     formData.append('file', {
-      name: file.filename,
-      uri:
-        Platform.OS === 'android' ? file.uri : file.uri.replace('file://', ''),
+      type: 'image/jpg',
+      uri: file.uri,
+      name: `signature-${deliveryId}.jpg`,
     });
-
-    console.tron.log(formData)
 
     const sendFile = await api.post('/files', formData, {
       headers: {
-          Accept: 'application/json',
-          'Content-Type': 'multipart/form-data',
-      });
+        Accept: 'application/json',
+        'Content-Type': 'multipart/form-data',
+      },
+    });
 
-      console.tron.log(sendFile)
+    console.tron.log(sendFile);
+
+    const response = await api.post(`/deliveryman/${auth.id}/finish`, {
+      delivery_id: deliveryId,
+      signature_id: sendFile.data.id,
+      end_date: end_date.toISOString(),
+    });
+
+    if (response.data) {
+      alert('Entrega completa!');
+      navigation.goBack();
+    }
   }
 
   return (
@@ -52,7 +66,7 @@ export default function CompleteDelivery() {
       <Background />
       <Container>
         <Content>
-          <Camera ref={camera} />
+          <Camera ref={camera} captureAudio={false} />
           <Capture onPress={takePicture}>
             <Icon name="photo-camera" size={25} color="#FFFFFF" />
           </Capture>

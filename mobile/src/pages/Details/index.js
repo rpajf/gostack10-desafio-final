@@ -103,7 +103,10 @@ export default function Details({ route, navigation }) {
             </ButtonsView>
             <ButtonsView
               onPress={() =>
-                navigation.navigate('SeeProblems', { deliveryId: delivery.id, deliveryName: delivery.product })
+                navigation.navigate('SeeProblems', {
+                  deliveryId: delivery.id,
+                  deliveryName: delivery.product,
+                })
               }
             >
               <Icon name="info-outline" color="#E7BA40" size={20} />
@@ -113,6 +116,7 @@ export default function Details({ route, navigation }) {
               onPress={() =>
                 navigation.navigate('CompleteDelivery', {
                   deliveryId: delivery.id,
+                  deliveryName: delivery.product,
                 })
               }
             >
